@@ -1,4 +1,5 @@
 pageCache               = {}
+contentTransform        = (html)-> html
 cacheSize               = 10
 transitionCacheEnabled  = false
 progressBar             = null
@@ -9,6 +10,7 @@ loadedAssets            = null
 referer                 = null
 
 xhr                     = null
+
 
 EVENTS =
   BEFORE_CHANGE:  'page:before-change'
@@ -262,7 +264,7 @@ CSRFToken =
 
 createDocument = (html) ->
   doc = document.documentElement.cloneNode()
-  doc.innerHTML = html
+  doc.innerHTML = contentTransform html
   doc.head = doc.querySelector 'head'
   doc.body = doc.querySelector 'body'
   doc
@@ -541,11 +543,13 @@ else
 #   Turbolinks.pagesCached(20)
 #   Turbolinks.enableTransitionCache()
 #   Turbolinks.allowLinkExtensions('md')
+#   Turbolinks.contentTransform(function _transform(content){ ... })
 #   Turbolinks.supported
 #   Turbolinks.EVENTS
 @Turbolinks = {
   visit,
   pagesCached,
+  contentTransform,
   enableTransitionCache,
   enableProgressBar,
   allowLinkExtensions: Link.allowExtensions,

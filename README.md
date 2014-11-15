@@ -200,6 +200,14 @@ Full speed for pushState browsers, graceful fallback for everything else
 
 Like pjax, this naturally only works with browsers capable of pushState. But of course we fall back gracefully to full page reloads for browsers that do not support it.
 
+Content Transformation
+------------------------
+
+Response HTML may be modified before Turbolinks renders the content into the DOM.
+
+```javascript
+Turbolinks.contentTransformation = function(html){ return html; };
+```
 
 Compatibility
 -------------
